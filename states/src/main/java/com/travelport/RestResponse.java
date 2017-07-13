@@ -3,10 +3,10 @@ package com.travelport;
 public class RestResponse {
 
 	private String[] messages;
-	private Result result;
+	private Result[] result;
 	
 	/**
-	 * @return the messages
+	 * @return the messages in the response
 	 */
 	public String[] getMessages() {
 		return messages;
@@ -20,15 +20,13 @@ public class RestResponse {
 	/**
 	 * @return the result
 	 */
-	public Result getResult() {
+	public Result[] getResult() {
 		return result;
 	}
 	/**
 	 * @param result the result to set
 	 */
-	public void setResult(Result result) {
+	public void setResult(Result[] result) {
 		this.result = result;
 	}
-
-	
 }
