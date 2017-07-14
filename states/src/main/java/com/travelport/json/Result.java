@@ -5,99 +5,98 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Result {
 
-	private String country;
-	private String name;
-	private String abbr;
-	private String area;
-	private String largest_city;
-	private String capital;
-	
-	public Result() {
-	}
+    private String country;
+    private String name;
+    private String abbr;
+    private String area;
+    private String largest_city;
+    private String capital;
 
-	/**
-	 * @return the country
-	 */
-	public String getCountry() {
-		return country;
-	}
+    public Result() {
+    }
 
-	/**
-	 * @param country the country to set
-	 */
-	public void setCountry(String country) {
-		this.country = country;
-	}
+    /**
+     * @return the country
+     */
+    public String getCountry() {
+        return country;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * @return the abbr
-	 */
-	public String getAbbr() {
-		return abbr;
-	}
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * @param abbr the abbr to set
-	 */
-	public void setAbbr(String abbr) {
-		this.abbr = abbr;
-	}
+    /**
+     * @return the abbr
+     */
+    public String getAbbr() {
+        return abbr;
+    }
 
-	/**
-	 * @return the area
-	 */
-	public String getArea() {
-		return area;
-	}
+    /**
+     * @param abbr the abbr to set
+     */
+    public void setAbbr(String abbr) {
+        this.abbr = abbr;
+    }
 
-	/**
-	 * @param area the area to set
-	 */
-	public void setArea(String area) {
-		this.area = area;
-	}
+    /**
+     * @return the area
+     */
+    public String getArea() {
+        return area;
+    }
 
-	/**
-	 * @return the largest_city
-	 */
-	public String getLargest_city() {
-		return largest_city;
-	}
+    /**
+     * @param area the area to set
+     */
+    public void setArea(String area) {
+        this.area = area;
+    }
 
-	/**
-	 * @param largest_city the largest_city to set
-	 */
-	public void setLargest_city(String largest_city) {
-		this.largest_city = largest_city;
-	}
+    /**
+     * @return the largest_city
+     */
+    public String getLargest_city() {
+        return largest_city;
+    }
 
-	/**
-	 * @return the capital
-	 */
-	public String getCapital() {
-		return capital;
-	}
+    /**
+     * @param largest_city the largest_city to set
+     */
+    public void setLargest_city(String largest_city) {
+        this.largest_city = largest_city;
+    }
 
-	/**
-	 * @param capital the capital to set
-	 */
-	public void setCapital(String capital) {
-		this.capital = capital;
-	}
+    /**
+     * @return the capital
+     */
+    public String getCapital() {
+        return capital;
+    }
 
+    /**
+     * @param capital the capital to set
+     */
+    public void setCapital(String capital) {
+        this.capital = capital;
+    }
 
 }
