@@ -8,6 +8,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -40,27 +41,62 @@ public class StatesResource {
     	
     	try {
     		// Retrieve all US states
-			Response allStatesResponse = retrieveAllStates();
+			Response allStates = retrieveAllStates();
 			
-			if (allStatesResponse != null && allStatesResponse.getRestResponse() != null) {
-				// Build array containing just Alabama and Georgia
-				Result[] allStates = allStatesResponse.getRestResponse().getResult();
-				List<Result> southernStates = new ArrayList<Result>();
-				for (int i = 0; i < allStates.length; i++) {
-					Result state = allStates[i];
+			if (allStates != null && allStates.getRestResponse() != null && allStates.getRestResponse().getResult() != null) {
+				// Build list containing just Alabama and Georgia
+				List<Result> peachStates = new ArrayList<Result>();
+				for (Result state : allStates.getRestResponse().getResult()) {
 					if (state != null) {
 						if (Constants.ALABAMA.equalsIgnoreCase(state.getName()) || Constants.GEORGIA.equalsIgnoreCase(state.getName())) {
-							southernStates.add(state);
+							peachStates.add(state);
 						}
 					}
 				}
-				Result[] southernStateArray = new Result[southernStates.size()];
-				southernStateArray = southernStates.toArray(southernStateArray);
 				
-				// Build response to be returned that only contains Alabama and Georgia
-				RestResponse restResponse = new RestResponse();
-				restResponse.setMessages(new String[] {String.format("Total [%d] records found.", southernStates.size())});
-				restResponse.setResult(southernStateArray);
+				// Build response to be returned
+				RestResponse restResponse = buildRestResponse(peachStates);
+				response.setRestResponse(restResponse);
+			}
+			else {
+				response = getUnknownErrorResponse();
+			}
+		} catch (Exception e) {
+			response = getUnknownErrorResponse();
+		}
+    	
+        return response;
+    }
+
+    /**
+     * Method handling HTTP GET requests at the "/allstatesexcept{statetoexclude}" path. The response will be returned
+     * to the client as the "application/JSON" media type.
+     *
+     * @return Response
+     */
+    @GET
+    @Path("/allstatesexcept/{statetoexclude}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllStatesExcept(@PathParam("statetoexclude") String stateToExclude) {
+    	Response response = new Response();
+    	
+    	try {
+    		// Retrieve all US states
+			Response allStates = retrieveAllStates();
+			
+			if (allStates != null && allStates.getRestResponse() != null && allStates.getRestResponse().getResult() != null) {
+				// Build list containing all states except the excluded one
+				List<Result> statesToReturn = new ArrayList<Result>();
+				for (Result state : allStates.getRestResponse().getResult()) {
+					if (state != null) {
+						if (!stateToExclude.equalsIgnoreCase(state.getName())) {
+							statesToReturn.add(state);
+						}
+					}
+				}
+				
+				// Build response to be returned
+				RestResponse restResponse = buildRestResponse(statesToReturn);
 				response.setRestResponse(restResponse);
 			}
 			else {
@@ -73,6 +109,22 @@ public class StatesResource {
         return response;
     }
     
+	/**
+	 * 	Build the RestResponse object to return to user from list of results
+	 * 
+	 * @return RestResponse
+	 */   
+    private RestResponse buildRestResponse(List<Result> results) {
+    	// Convert list into array to be returned
+		Result[] resultsArray = new Result[results.size()];
+		resultsArray = results.toArray(resultsArray);
+		// Build rest response
+		RestResponse restResponse = new RestResponse();
+		restResponse.setMessages(new String[] {String.format(Constants.TOTAL_RECORDS_FOUND_MSG, results.size())});
+		restResponse.setResult(resultsArray);
+		return restResponse;
+    }
+
 	/**
 	 * 	Build a response containing a polite error message indicating something went wrong
 	 * 

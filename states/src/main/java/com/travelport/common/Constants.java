@@ -16,6 +16,11 @@ public class Constants {
      * Atlanta proxy port
      */
 	public static final int PROXY_PORT = 8080;
+	
+	/**
+     * Message indicating the total number of records found
+     */
+	public static final String TOTAL_RECORDS_FOUND_MSG = "Total [%d] records found.";
 
 	/**
      * Error message to return when something unexpected goes wrong
