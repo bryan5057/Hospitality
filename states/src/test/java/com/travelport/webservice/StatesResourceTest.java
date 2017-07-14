@@ -1,9 +1,9 @@
 package com.travelport.webservice;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,7 +44,7 @@ public class StatesResourceTest {
     }
 
     @Test
-    public void testGetAllStatesExcept() {
+    public void testGetAllStatesExceptGeorgia() {
         StatesResource resource = new StatesResource();
         Response response = resource.getAllStatesExcept(Constants.GEORGIA);
         assertNotNull(response);
@@ -57,6 +57,18 @@ public class StatesResourceTest {
         for (Result result : results) {
             assertFalse("Unexpected state name found", Constants.GEORGIA.equalsIgnoreCase(result.getName()));
         }
+    }
+    
+    @Test
+    public void testGetStatesExceptWithNoValue() {
+        StatesResource resource = new StatesResource();
+        Response response = resource.getAllStatesExcept("");
+        assertNotNull(response);
+        RestResponse restResponse = response.getRestResponse();
+        assertNotNull(restResponse);
+        Result[] results = restResponse.getResult();
+        assertNotNull(results);
+        assertEquals("Unexpected number of states returned", 56, results.length);
     }
 
     @After

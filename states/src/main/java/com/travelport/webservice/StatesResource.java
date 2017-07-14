@@ -8,8 +8,8 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -26,7 +26,7 @@ import com.travelport.json.Result;
  */
 @Path("/get")
 public class StatesResource {
-
+    
     /**
      * Method handling HTTP GET requests at the "/peachstates" path. The
      * response will be returned to the client as the "application/JSON" media
@@ -70,16 +70,16 @@ public class StatesResource {
     }
 
     /**
-     * Method handling HTTP GET requests at the "/allstatesexcept/{statetoexclude}"
+     * Method handling HTTP GET requests at the "/allexcept"
      * path. The response will be returned to the client as the "application/JSON" 
      * media type.
      *
      * @return Response
      */
     @GET
-    @Path("/allstatesexcept/{statetoexclude}")
+    @Path("/allexcept")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllStatesExcept(@PathParam("statetoexclude") String stateToExclude) {
+    public Response getAllStatesExcept(@QueryParam("statetoexclude") String stateToExclude) {
         Response response = new Response();
 
         try {
@@ -91,7 +91,7 @@ public class StatesResource {
                 List<Result> statesToReturn = new ArrayList<Result>();
                 for (Result state : all.getRestResponse().getResult()) {
                     if (state != null) {
-                        if (!stateToExclude.equalsIgnoreCase(state.getName())) {
+                        if (!state.getName().equalsIgnoreCase(stateToExclude)) {
                             statesToReturn.add(state);
                         }
                     }
