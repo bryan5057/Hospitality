@@ -8,14 +8,10 @@ public class Response {
     private RestResponse RestResponse;
 
     public RestResponse getRestResponse() {
-        return RestResponse;
+        return this.RestResponse;
     }
 
     public void setRestResponse(RestResponse restResponse) {
-        RestResponse = restResponse;
-    }
-
-    public Response() {
-
+        this.RestResponse = restResponse;
     }
 }

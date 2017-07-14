@@ -9,7 +9,7 @@ public class Result {
     private String name;
     private String abbr;
     private String area;
-    private String largest_city;
+    private String largestCity;
     private String capital;
 
     public Result() {
@@ -75,14 +75,14 @@ public class Result {
      * @return the largest_city
      */
     public String getLargest_city() {
-        return largest_city;
+        return largestCity;
     }
 
     /**
      * @param largest_city the largest_city to set
      */
     public void setLargest_city(String largest_city) {
-        this.largest_city = largest_city;
+        this.largestCity = largest_city;
     }
 
     /**
