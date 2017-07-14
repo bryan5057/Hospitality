@@ -1,4 +1,4 @@
-package com.travelport;
+package com.travelport.common;
 
 public class Constants {
 	
